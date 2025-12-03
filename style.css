@@ -1,0 +1,98 @@
+/* Reseteo básico y fuente */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* Fondo fijo */
+    background: url('img/fondo.png') no-repeat center center fixed; 
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.main-container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Un poco más estrecho para que parezca móvil */
+    padding: 20px;
+    opacity: 0; 
+    transition: opacity 1.5s ease-in;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra todo el contenido verticalmente */
+}
+
+/* --- LOGO PRINCIPAL --- */
+.floating-logo {
+    width: 150px; 
+    height: 150px;
+    object-fit: contain;
+    animation: flotar 3s ease-in-out infinite;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+}
+
+.brand-name {
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px #000000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- CONTENEDOR DE ENLACES (CASCADA) --- */
+.links-container {
+    background: rgba(94, 92, 92, 0.356); 
+    padding: 30px;
+    border-radius: 20px;
+    
+    /* ESTOS SON LOS CAMBIOS CLAVE: */
+    display: flex;
+    flex-direction: column; /* Pone los elementos en columna (cascada) */
+    align-items: center;    /* Los centra horizontalmente */
+    gap: 25px;              /* Espacio vertical entre cada logo */
+    
+    width: 100%;            /* Ocupa el ancho disponible del padre */
+    max-width: 250px;       /* Ancho máximo de la caja transparente */
+    
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- ESTILO DE LOS ICONOS DE PLATAFORMAS --- */
+.icon-link img {
+    /* FORZAMOS EL TAMAÑO AQUÍ: */
+    width: 80px;   /* Ancho fijo */
+    height: 80px;  /* Alto fijo */
+    
+    /* TRUCO MAGICO: */
+    object-fit: contain; /* Ajusta la imagen dentro de la caja sin recortarla ni estirarla */
+    
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5)); /* Sombra al icono para que resalte */
+}
+
+.icon-link img:hover {
+    transform: scale(1.1); /* Crece un poco al pasar el ratón */
+    filter: brightness(1.2) drop-shadow(0 6px 6px rgba(0,0,0,0.7));
+}
+
+/* Animación Flotar */
+@keyframes flotar {
+    0% { transform: translate(0, 0px); }
+    50% { transform: translate(0, -15px); }
+    100% { transform: translate(0, 0px); }
+}
+
+.fade-in {
+    opacity: 1;
+}
