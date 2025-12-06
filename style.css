@@ -10,29 +10,33 @@ body {
     /* Fondo fijo */
     background: url('img/fondo.png') no-repeat center center fixed; 
     background-size: cover;
-    height: 100vh;
+    
+    /* CORRECCIÓN SCROLL: Usamos min-height y permitimos scroll vertical */
+    min-height: 100vh;
+    overflow-y: auto; /* Permite scroll si el contenido es alto */
+    
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden; 
+    align-items: flex-start; /* Alineamos arriba para que el scroll empiece bien */
+    
+    padding: 40px 20px; /* Margen para que no se pegue a los bordes en móvil */
 }
 
 .main-container {
     text-align: center;
     width: 100%;
-    max-width: 400px; /* Un poco más estrecho para que parezca móvil */
-    padding: 20px;
+    max-width: 400px;
     opacity: 0; 
     transition: opacity 1.5s ease-in;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra todo el contenido verticalmente */
+    align-items: center;
 }
 
 /* --- LOGO PRINCIPAL --- */
 .floating-logo {
-    width: 150px; 
-    height: 150px;
+    width: 140px; 
+    height: 140px;
     object-fit: contain;
     animation: flotar 3s ease-in-out infinite;
     filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
@@ -48,48 +52,68 @@ body {
     text-transform: uppercase;
 }
 
-/* --- CONTENEDOR DE ENLACES (CASCADA) --- */
+/* --- CONTENEDOR DE ENLACES (GRID) --- */
 .links-container {
-    background: rgba(94, 92, 92, 0.356); 
-    padding: 30px;
+    background: rgba(94, 92, 92, 0.35); 
+    padding: 25px;
     border-radius: 20px;
     
-    /* ESTOS SON LOS CAMBIOS CLAVE: */
-    display: flex;
-    flex-direction: column; /* Pone los elementos en columna (cascada) */
-    align-items: center;    /* Los centra horizontalmente */
-    gap: 25px;              /* Espacio vertical entre cada logo */
+    /* DISEÑO EN CUADRÍCULA (2 COLUMNAS) */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 20px; /* Espacio entre iconos */
+    justify-items: center;
+    align-items: center;
     
-    width: 100%;            /* Ocupa el ancho disponible del padre */
-    max-width: 250px;       /* Ancho máximo de la caja transparente */
+    width: 100%;           
+    max-width: 320px; /* Ancho controlado para que se vea compacto */
     
     backdrop-filter: blur(10px); 
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* --- ESTILO DE LOS ICONOS DE PLATAFORMAS --- */
+/* --- ESTILO DE LOS ICONOS --- */
+.icon-link {
+    display: flex; /* Para quitar espacios extra del tag <a> */
+}
+
 .icon-link img {
-    /* FORZAMOS EL TAMAÑO AQUÍ: */
-    width: 80px;   /* Ancho fijo */
-    height: 80px;  /* Alto fijo */
-    
-    /* TRUCO MAGICO: */
-    object-fit: contain; /* Ajusta la imagen dentro de la caja sin recortarla ni estirarla */
-    
+    width: 75px;   /* Un pelín más pequeño para que quepan bien dos */
+    height: 75px;
+    object-fit: contain;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5)); /* Sombra al icono para que resalte */
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
 }
 
 .icon-link img:hover {
-    transform: scale(1.1); /* Crece un poco al pasar el ratón */
+    transform: scale(1.1);
     filter: brightness(1.2) drop-shadow(0 6px 6px rgba(0,0,0,0.7));
+}
+
+
+.icon-link:last-child {
+    grid-column: span 2;
+    margin-top: 10px;
+}
+
+.icon-link:last-child img {
+    width: 90px; /* El canal principal un poco más grande */
+    height: 90px;
+}
+
+/* Pie de página */
+.footer {
+    margin-top: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
 
 /* Animación Flotar */
 @keyframes flotar {
     0% { transform: translate(0, 0px); }
-    50% { transform: translate(0, -15px); }
+    50% { transform: translate(0, -10px); } /* Movimiento más suave */
     100% { transform: translate(0, 0px); }
 }
 
